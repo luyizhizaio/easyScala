@@ -30,7 +30,7 @@ object MonitorStatTest {
     import sqlContext.implicits._
     import sqlContext.sql
 
-    new UnionRDD(sc,List("","").map{
+/*    new UnionRDD(sc,List("","").map{
       case day =>
         val path = s"$path_prefix/$day"
         sc.textFile(path).flatMap{
@@ -47,10 +47,10 @@ object MonitorStatTest {
 
 
     val sql_func = (media:String, sc:String,eventType:String,idType:Int)=>{
-      s"select distinct(id) from t_monitor wher mediaId=$media and sc = $sc
+      s"select distinct(id) from t_monitor wher mediaId=$media and sc = $sc"
 
 
-    }
+    }*/
 
 
 
