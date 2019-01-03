@@ -15,8 +15,6 @@ public class Main {
 
         ActorSystem system = ActorSystem.create("lifecycle", ConfigFactory.load("lifecycle.conf"));
         customstrategy(system);
-
-
     }
 
     public static void customstrategy(ActorSystem system){
@@ -35,7 +33,5 @@ public class Main {
         }
 
     }
-
-
 
 }
