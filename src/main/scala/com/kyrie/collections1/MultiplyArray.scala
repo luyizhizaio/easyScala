@@ -8,7 +8,7 @@ object MultiplyArray {
   def main(args: Array[String]) {
 
 
-    //¶¨Òå3ÐÐ4ÁÐ¶þÎ¬Êý×é
+    //å®šä¹‰3è¡Œ4åˆ—äºŒç»´æ•°ç»„
     val arr = Array.ofDim[Int](3,4)
 
     for (item <- arr){
