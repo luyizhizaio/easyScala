@@ -4,8 +4,9 @@ import java.util.UUID
 
 import akka.actor.{Props, ActorSelection, ActorSystem, Actor}
 import akka.actor.Actor.Receive
-import com.kyrie.akka.sparkmasterworker.common.{RegisterWorkerInfo, RegisteredWorkerInfo}
+import com.kyrie.akka.sparkmasterworker.common.{HeartBeat, SendHeartBeat, RegisterWorkerInfo, RegisteredWorkerInfo}
 import com.typesafe.config.ConfigFactory
+import scala.concurrent.duration._
 
 /**
  * Created by Kyrie on 2019/1/26.
@@ -38,6 +39,22 @@ class SparkWorker(masterHost:String,masterPort:Int) extends Actor {
 
       println(s"workerId = $id 注册成功....")
 
+      //发送心跳：注册成功后，就定义一个定时器，每隔一段时间，发送sendHeartBeat给自己。
+
+      import context.dispatcher
+      // 0 立即执行
+      //3000 每隔3秒发送一次
+      //self 发给self
+      //SendHeartBeat
+      context.system.scheduler.schedule(0 millis,3000 millis,self,SendHeartBeat)
+
+
+
+    }
+
+    case SendHeartBeat => {
+      println(s"worker=${id} 给master发送心跳")
+      masterProxy ! HeartBeat(id)
     }
   }
 }
